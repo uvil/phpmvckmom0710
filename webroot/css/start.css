@@ -1,0 +1,76 @@
+
+body{
+  background-color: #8C4108;
+  background: url("../img/theforceavakensray.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover;
+  color: white;
+  font: 18px/23px "Open Sans", sans-serif; 
+}
+
+
+.welcome{
+	text-transform: uppercase;
+	width: 44%;
+	margin: 18% auto; 
+	min-height: 44vh;
+}
+
+
+
+.welcome h1{
+	text-align: center;
+	font-size: 62px;
+	font-weight: bold;
+	margin: 3%;
+}
+
+.buttons{
+	margin-top: 4%;
+	text-align: center;
+}
+
+#white{
+	background: #DE7A2E;
+	border-color: #DE7A2E;
+	color: white;
+}
+
+#white:hover{
+	background: #B16124;
+	border-color: #B16124;
+	
+}
+
+#none{
+	background:transparent;
+	border-color: white;
+}
+
+#none:hover{
+	background: white;
+	color:#222;
+}
+
+
+/* Responsive */
+
+@media (max-width: 950px) {
+        
+        .welcome{ width: 90%;}
+	.welcome h1{font-size: 28px;}
+        .welcome p{ font-size: 16px; line-height: 18px; text-align: justify;}
+        .buttons{ margin-top: 40px;}
+        #white, #none{ font-size: 14px; line-height: 16px;}
+
+}
+
+
+
+
+
+
+
+

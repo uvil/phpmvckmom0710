@@ -1,0 +1,186 @@
+
+
+/*@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');*/
+
+*{
+	padding:0;
+	margin:0;
+}
+
+
+body{
+	font:14px/1.5 Arial, Helvetica, sans-serif;
+	background: #fcfcfc;
+}
+
+.headerban{
+	background: #222;
+	padding: 10px;
+	font-size: 16.2px;
+	font-weight: 300;
+	color:white;
+}
+
+.headersubBan{
+	text-align: center;
+	font-size: 2em;
+	background: #222;
+	padding: 10px;
+	color: white;
+	margin-bottom: 3vw;
+}
+
+.orange{
+	color:#E99225;
+}
+
+.mypanel{
+	height: 560px;
+	overflow: hidden;
+	/*border-bottom: 1px solid #C4C4C4; */
+}
+
+.mypanel>h3{ line-height: 20px; margin:10px; margin-top:20px; }
+.mypanel h3{ background: #E7E7E7; margin:0; padding:15px; padding-left: 30px; border: 1px solid #C4C4C4; 
+	border-left: none; border-right: none;}
+.mypanel h4{ padding-left: 20px;}
+.mypanel p{ padding-left: 20px;}
+
+
+.panel{ margin: 0.6%;}
+
+.fullheight{ height: 559px;}
+.pad40{ padding: 1%;}
+.marginleft20{ margin-left: 23%; border: 1px solid #C4C4C4; border-top:none; border-left:0;}
+.width20{ width: 23%; border: 1px solid #C4C4C4;}
+
+.post{
+	height: 100px;
+	padding: 16px;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+}
+
+.tag-post{
+	padding-top:25px;
+}
+
+.tag-post span{ display: inline-block; margin-left: 10px;}
+
+
+.post:hover{ background: #f3f3f3; border-top: 1px solid #d6d6d6;  border-bottom: 1px solid #d6d6d6;
+cursor: pointer;}
+
+.color1{background: #F8F8F8;}
+.color2{background: #e0cec3;}
+.color3{background: #ccc3b8;}
+
+.backimg1{background: url('../img/han_solo.jpg'); }
+.backimg2{background: url('../img/Old_Luke_Skywalker_promo.png');}
+.backimg3{background: url('../img/princess_leia.jpg');}
+
+
+/* header */
+header{
+	background: url('../img/reyEyesBan.jpg') no-repeat center center;
+	height: 20vw;
+	  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+/* main */
+main{
+	min-height: 200px;
+}
+
+.btn-orange{ background: #DE7A2E; border:1px solid #BA6829 !important; color:#63310B; margin-top:40px; }
+.btn-orange:hover{ background: #B16124;}
+.btn-orange:active{ background: #85491B;}
+.nomargin{ margin:0;}
+.autowidth{ display: inline-block;}
+
+
+
+/*nav */
+nav{
+	/*background-color: #292c2f;*/
+	color: #ddd;
+	text-align: right;
+	padding:8px 20px;
+	line-height: 20px;
+    color: #92999f;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+/*large navigation style */
+.nav{
+	text-align: center;
+	color: #2A282F;
+	font-size: 1.9em;
+}
+
+.navImg{
+	filter: brightness(10);
+	 -webkit-filter: brightness(10);
+	 display: inline-block;
+	 margin-right: 20px;
+	 font-size: 22px;
+	 color:#191919;
+}
+
+.navImg:hover{
+	filter: brightness(5);
+	-webkit-filter: brightness(5);
+	color: #272327;
+	border-bottom: 1px solid #cc60cc;
+}
+
+.navImg img{
+	display: block;
+	height: 30px;
+	margin: 3px auto;
+}
+
+
+.nav>div, .nav>a>div{display: inline-block;}
+
+
+.nav .large-circle{
+	width: 300px;
+	height: 300px;
+	border: 1px solid #ddd;
+	
+	 /*background: #f6f6f6;*/
+	border-radius: 50%;
+	font-weight: bolder;
+	margin: 0 20px;
+}
+
+.nav img{ 
+	display: block;
+	margin: 40px auto 0 auto;
+}
+
+.nav .large-circle:hover{background: #eee; color: #2A282F;}
+
+.nav a{ color: #2A282F;}
+
+#left{  height:240px; vertical-align: middle;}
+#right{ height:240px; vertical-align: middle;}
+#right a{color: #888;}
+
+.center-block{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
