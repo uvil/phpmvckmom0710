@@ -2,13 +2,15 @@
 	</header>
 
     <div class="headersubBan">Logga in</div>
+    
+    <div style="text-align: center; color:red;"><?=$message?></div>
     <div class="container" >
 		
-			<div class="col-sm-6 col-md-8 col-md-offset-2">
-				<div class="panel panel-default " style="padding: 30px;">
+			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="panel panel-default" style="padding: 30px; margin-bottom: 50px;">
 					
 					
-						<form role="form"  action="?p=main" method="POST">
+						<form role="form" action="loginsubmit" method="post">
 							
 								<div class="row" style="padding-bottom:20px;">
 									<div class="center-block">

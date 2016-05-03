@@ -106,11 +106,11 @@ main{
 
 /*nav */
 nav{
-	/*background-color: #292c2f;*/
-	color: #ddd;
-	text-align: right;
-	padding:8px 20px;
-	line-height: 20px;
+    /*background-color: #292c2f;*/
+   color: #ddd;
+    text-align: right;
+    /*padding:8px 20px;*/
+    /*line-height: 20px;*/
     color: #92999f;
     font-size: 13px;
     font-weight: normal;

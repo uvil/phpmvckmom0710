@@ -19,4 +19,9 @@ $di->setShared('db', function() {
 });
 
 
-$app = new \Anax\Kernel\CAnax($di);
+//$app = new \Anax\Kernel\CAnax($di);
+
+//bytte till CApplicationBasic enligt följande tips 
+//http://dbwebb.se/kunskap/anvand-cform-tillsammans-med-anax-mvc#vidare
+
+$app = new \Anax\MVC\CApplicationBasic($di);

@@ -1,10 +1,10 @@
 		<header>
 		</header>
 <div class="headersubBan">Skapa nytt konto</div>
-<div class="container" >
+<div class="container">
 		
-			<div class="col-sm-6 col-md-8 col-md-offset-2">
-				<div class="panel panel-default " style="padding: 30px;">
+			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<div class="panel panel-default " style="padding: 30px; margin-bottom: 50px;">
 					
 					
 						<form role="form" id="applyForm"  action="#" method="POST">

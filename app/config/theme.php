@@ -52,7 +52,7 @@ return [
 
         // Stylesheets
         //'stylesheets' => ['css/style.css'],
-        'stylesheets' => ['css/main.css','css/navbar.css','css/footer.css','font-awesome-4.5.0/css/font-awesome.min.css'],
+        'stylesheets' => ['css/main.css','css/navbar.css','css/footer.css','font-awesome-4.5.0/css/font-awesome.min.css','css/bootstrap/bootstrap.css'],
 
         // Inline style
         'style' => null,

@@ -9,15 +9,28 @@ $app->navbar->configure(ANAX_APP_PATH . 'config/navbar.php');
 $app->theme->configure(ANAX_APP_PATH . 'config/theme.php');
 
 //landing page
-$app->router->add('', function() use ($app) {
-  $app->theme->addStylesheet('css/start.css');
+$app->router->add('', function() use ($app,$di) {
+  
+  //set title
   $app->theme->setVariable('title', "Start");
+  
+  //is user authorised?
+  $usr = new \Anax\UVC\CUserBase('user');
+  $usr->setDI($di);
+  $auth = $usr->isAuthorised();
+  
+  if($auth){
+    $app->views->add('ssws/firstpage');
+  }
+  else{
+  $app->theme->addStylesheet('css/start.css');
   $app->theme->setVariable('hidenav',true);
  
   $login =$app->url->create("login");
   $apply =$app->url->create("apply");
 
   $app->views->add('ssws/start',['loginlink'=>$login,'applylink'=>$apply]);
+  }
 });
 
 //login page
@@ -29,7 +42,13 @@ $app->router->add('login',function() use($app)
   $return = $app->url->create();
   $apply =$app->url->create("apply");
   
-  $app->views->add('ssws/login',['returnlink'=>$return,'applylink'=>$apply]);
+  $message="";
+  $m = $app->request->getGet('m');
+  if($m=="err")
+    $message="Nope. Inte inloggad. Felaktigt användarnamn eller lösenord.";
+  
+  
+  $app->views->add('ssws/login',['returnlink'=>$return,'applylink'=>$apply,'message'=>$message]);
 });
 
 //apply for new account page
@@ -64,16 +83,7 @@ $app->router->add('user_info', function() use ($app, $di)
   $app->theme->setVariable('main',$html);
 });
 
-$app->router->add('loginform', function() use ($app, $di) 
-{
-  $app->theme->setVariable('title', "Login");
-  
-  $usr = new \Anax\UVC\CUserBase('user');
-  $usr->setDI($di);
-  
-$app->theme->setVariable('main',"<div style='margin-top:80px;'>".$usr->getLoginForm('login')."</div>");
-});
-
+//use this route when login submit
 $app->router->add('loginsubmit', function() use ($app, $di) 
 {
   $app->theme->setVariable('title', "Login process");
@@ -87,16 +97,17 @@ $app->router->add('loginsubmit', function() use ($app, $di)
   //check login and give feedback
   $res = null;
   if($usr->login($name,$pass)){
-    $res = "<div style='margin-top:80px;'>Okej! Du är nu inloggad.</div>";
+    $app->redirectTo("");
   }
   else{
-   $res = "<div style='margin-top:80px;'>Nope! Fel användarnamn eller lösenord.</div>";
+    $app->redirectTo("login?m=err");
   }
    
   $app->theme->setVariable('main',$res);
   
 });
 
+//use this rotue when logging out
 $app->router->add('logout', function() use ($app, $di) 
 {
   $app->theme->setVariable('title', "Logout");
@@ -106,7 +117,7 @@ $app->router->add('logout', function() use ($app, $di)
   
   $usr->logout();
   
-$app->theme->setVariable('main',"<div style='margin-top:80px;'>Du är nu utloggad.</div>");
+  $app->redirectTo("");
 });
 
   

@@ -4,7 +4,10 @@
   margin-bottom: 44px;
 }
 
-.navbar {}
+.navbar {
+    margin-bottom: 0 !important;
+    min-height: 0 !important;
+}
  
 .navbar ul {
   list-style: none; 
@@ -14,7 +17,7 @@
  
 .navbar li {
   display: inline-block;
-  border-top: 4px solid transparent; 
+  border-bottom: 3px solid transparent; 
   color: #333; 
   position: relative; 
 }
@@ -22,22 +25,25 @@
 .navbar a {
   display: block;
   width: 100%;
-  padding: 1em;
-  text-decoration: none;
-  color: inherit;
+  padding: 0px 5px;
+  text-decoration: none !important;
+  color: #939393;
   white-space: nowrap; 
 }
 
 .navbar li:hover {
   color: #666; 
-  border-color: #666;
 } 
+
+.navbar li a:hover{
+    color: #DB8A23 !important;
+}
  
 .navbar li.selected-parent, 
 .navbar li.is-parent, 
 .navbar li.selected {
-  color: #22f; 
-  border-color: #22f;
+  color: red !important; 
+  border-color: #DB8A23;
 }
 
 .navbar ul ul {
