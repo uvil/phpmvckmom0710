@@ -83,10 +83,11 @@ $app->router->add('user_info', function() use ($app, $di)
   $app->theme->setVariable('main',$html);
 });
 
-//use this route when login submit
+// route used when login submit
 $app->router->add('loginsubmit', function() use ($app, $di) 
 {
   $app->theme->setVariable('title', "Login process");
+  $app->theme->setVariable('hidenav',true);
   
   $usr = new \Anax\UVC\CUserBase('user');
   $usr->setDI($di);
@@ -101,10 +102,7 @@ $app->router->add('loginsubmit', function() use ($app, $di)
   }
   else{
     $app->redirectTo("login?m=err");
-  }
-   
-  $app->theme->setVariable('main',$res);
-  
+  } 
 });
 
 //use this rotue when logging out
@@ -118,6 +116,26 @@ $app->router->add('logout', function() use ($app, $di)
   $usr->logout();
   
   $app->redirectTo("");
+});
+
+// route used when login submit
+$app->router->add('applysubmit', function() use ($app, $di) 
+{
+  $app->theme->setVariable('title', "Registration process");
+  $app->theme->setVariable('hidenav',true);
+  
+  $u['name'] = $app->request->getPost('usrname');
+  $u['acro'] = $app->request->getPost('usracronym');
+  $u['pass'] = $app->request->getPost('usrpass');
+  $u['mail'] = $app->request->getPost('usrmail');
+  
+  $usr = new \Anax\UVC\CUserBase('user');
+  $usr->setDI($di);
+  
+  $app->theme->addStylesheet('css/applysubmit.css');
+  $app->views->add('ssws/applysubmit',['user'=>$u]);
+  
+  
 });
 
   

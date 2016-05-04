@@ -7,7 +7,7 @@
 				<div class="panel panel-default " style="padding: 30px; margin-bottom: 50px;">
 					
 					
-						<form role="form" id="applyForm"  action="#" method="POST">
+						<form role="form" id="applyForm"  action="applysubmit" method="POST">
 							
 								<div class="row" style="padding-bottom:20px;">
 									<div class="center-block">
