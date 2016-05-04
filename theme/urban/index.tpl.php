@@ -17,14 +17,35 @@
 <body>
 
 <div id='wrapper'>
+        
     
 <div class="headerban clearfix">
-<?php 
-  if ($this->views->hasContent('navbar') && !isset($hidenav)){ 
-  $this->views->render('navbar');}
-?>
- Svenska <span class="orange">StarWars</span>Sällskapet 
-</div>    
+    
+    <div class="pull-left logo">Svenska <span class="orange">StarWars</span>Sällskapet</div> 
+    
+<?php if ($this->views->hasContent('navbar') && !isset($hidenav)):?>
+   <div class="navbar" role="navigation">
+      
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+     
+        <?php $this->views->render('navbar');?>
+          
+       </div><!-- end container --> 
+    </div><!-- end navbar --> 
+          
+<?php endif;?>
+    
+</div> 
+    
+    
     
 
 
@@ -55,6 +76,7 @@
   s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 <?php endif; ?>
+
 
 </body>
 </html>

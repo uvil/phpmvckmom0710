@@ -6,7 +6,7 @@
 return [
 
     // Use for styling the menu
-    'class' => 'navbar pull-right',
+    'class' => 'sswsnav navbar-collapse collapse',
  
     // Here comes the menu strcture
     'items' => [

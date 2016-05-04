@@ -4,6 +4,10 @@
   margin-bottom: 44px;
 }
 
+.navbar .container{
+    width: 101% !important;
+}
+
 .navbar {
     margin-bottom: 0 !important;
     min-height: 0 !important;
@@ -21,6 +25,27 @@
   color: #333; 
   position: relative; 
 }
+
+.navbar li a{ padding-top:10px;}
+
+.in ul {
+  display: table;
+  table-layout: fixed; /* optional */
+}
+
+.in ul li {
+  display: block;
+  text-align: left;
+}
+.ul li a{ font-size: 1.4em; line-height: 1.4em;}
+
+.navbar-toggle {margin-bottom:0 !important; 
+               
+               border-color: #ddd !important;
+               padding:6px !important;
+}
+
+.icon-bar{ background:white !important;}
  
 .navbar a {
   display: block;
