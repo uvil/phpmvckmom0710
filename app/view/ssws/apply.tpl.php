@@ -1,6 +1,9 @@
 		<header>
 		</header>
+                
 <div class="headersubBan">Skapa nytt konto</div>
+
+<div style="text-align: center; color:red;"><?=$message?></div>
 <div class="container">
 		
 			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">

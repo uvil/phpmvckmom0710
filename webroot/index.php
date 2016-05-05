@@ -8,7 +8,7 @@ $app->url->setUrlType(\Anax\Url\CUrl::URL_CLEAN);
 $app->navbar->configure(ANAX_APP_PATH . 'config/navbar.php');  
 $app->theme->configure(ANAX_APP_PATH . 'config/theme.php');
 
-//landing page
+//landing page---------------------------------------------------------------------------
 $app->router->add('', function() use ($app,$di) {
   
   //set title
@@ -33,9 +33,8 @@ $app->router->add('', function() use ($app,$di) {
   }
 });
 
-//login page
-$app->router->add('login',function() use($app)
-{
+//login page-----------------------------------------------------------------------------
+$app->router->add('login',function() use($app){
   $app->theme->setVariable('title', "Logga in");
   $app->theme->setVariable('hidenav',true);
   
@@ -51,19 +50,64 @@ $app->router->add('login',function() use($app)
   $app->views->add('ssws/login',['returnlink'=>$return,'applylink'=>$apply,'message'=>$message]);
 });
 
-//apply for new account page
-$app->router->add('apply',function() use($app)
-{
+//apply for new account page-------------------------------------------------------------
+$app->router->add('apply',function() use($app){
   $app->theme->setVariable('title', "Nytt konto");
   $app->theme->setVariable('hidenav',true);
   
+   $message="";
+  $m = $app->request->getGet('m');
+  if($m=="taken")
+  $message = "Akronymet upptaget, vänligen välj ett annat.";
+  
   $return =$app->url->create();
-  $app->views->add('ssws/apply',['returnlink'=>$return]);
+  $app->views->add('ssws/apply',['returnlink'=>$return,'message'=>$message]);
 });
 
+// route used when login submit----------------------------------------------------------
+$app->router->add('applysubmit', function() use ($app, $di) {
+  $app->theme->setVariable('title', "Registration process");
+  $app->theme->setVariable('hidenav',true);
+  
+ 
+  $acro = $app->request->getPost('usracronym');
+  $pass = $app->request->getPost('usrpass');
+  
+  
+  $usr = new \Anax\UVC\CUserBase('user');
+  $usr->setDI($di);
+  
+  if($usr->acronymExists($acro)) //if acronym i used
+  {
+    $app->redirectTo("apply?m=taken");
+  }
+  else
+  {
+      $now = gmdate("Y-m-d H:i:s");
+      
+      $data = [
+          'acronym'   => $acro,
+          'email'     => $app->request->getPost('usrmail'),
+          'name'      => $app->request->getPost('usrname'),
+          "password"  =>  password_hash($pass, PASSWORD_DEFAULT),
+          "created"   => $now,
+          "active"    => $now
+      ];
+      
+      $res = $usr->saveuser($data);
+ 
+      $app->theme->addStylesheet('css/applysubmit.css');
+      
+      if($res)
+        $app->views->add('ssws/applysubmit',['acro'=>$acro,'pass'=>$pass]);
+  }
+  
+  
+  
+  
+});
 
-$app->router->add('user_info', function() use ($app, $di) 
-{
+$app->router->add('user_info', function() use ($app, $di) {
   $app->theme->setVariable('title', "User Info");
   
   $usr = new \Anax\UVC\CUserBase('user');
@@ -83,9 +127,8 @@ $app->router->add('user_info', function() use ($app, $di)
   $app->theme->setVariable('main',$html);
 });
 
-// route used when login submit
-$app->router->add('loginsubmit', function() use ($app, $di) 
-{
+// route used when login submit----------------------------------------------------------
+$app->router->add('loginsubmit', function() use ($app, $di) {
   $app->theme->setVariable('title', "Login process");
   $app->theme->setVariable('hidenav',true);
   
@@ -105,9 +148,8 @@ $app->router->add('loginsubmit', function() use ($app, $di)
   } 
 });
 
-//use this rotue when logging out
-$app->router->add('logout', function() use ($app, $di) 
-{
+//use this rotue when logging out--------------------------------------------------------
+$app->router->add('logout', function() use ($app, $di) {
   $app->theme->setVariable('title', "Logout");
   
   $usr = new \Anax\UVC\CUserBase('user');
@@ -118,29 +160,9 @@ $app->router->add('logout', function() use ($app, $di)
   $app->redirectTo("");
 });
 
-// route used when login submit
-$app->router->add('applysubmit', function() use ($app, $di) 
-{
-  $app->theme->setVariable('title', "Registration process");
-  $app->theme->setVariable('hidenav',true);
-  
-  $u['name'] = $app->request->getPost('usrname');
-  $u['acro'] = $app->request->getPost('usracronym');
-  $u['pass'] = $app->request->getPost('usrpass');
-  $u['mail'] = $app->request->getPost('usrmail');
-  
-  $usr = new \Anax\UVC\CUserBase('user');
-  $usr->setDI($di);
-  
-  $app->theme->addStylesheet('css/applysubmit.css');
-  $app->views->add('ssws/applysubmit',['user'=>$u]);
-  
-  
-});
+
 
   
-
- 
 $app->router->add('redovisning', function() use ($app) {
   
   // Prepare the page content

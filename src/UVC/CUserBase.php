@@ -72,7 +72,7 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
   }
   
   
-  public function getLoginForm($action){
+  /*public function getLoginForm($action){
     
     return <<< HTML
         <div class="container" >
@@ -120,6 +120,46 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
 		
 	</div>
 HTML;
+  }*/
+  
+/**
+  * Check if acronym is taken.
+  *
+  * @return  true - if the acroym is used/taken 
+  *          or 
+  *          false - if available
+  */
+  public function acronymExists($acronym)
+  {
+    
+     $this->db->select('count(*) as posts')
+              ->from('user')//$this->getSource()
+              ->where("acronym = ?");
+
+     $this->db->execute([$acronym]);
+     
+     $res = $this->db->fetchOne();
+       
+     if($res->posts==1)
+       return true;
+     else
+       return false;
+     
+  }
+  
+  public function saveuser($data=[])
+  {
+    $keys   = array_keys($data);
+    $values = array_values($data);
+
+    $this->db->insert(
+       'user',
+       $keys
+    );
+
+     $res = $this->db->execute($values);
+     
+     return $res;
   }
   
   
