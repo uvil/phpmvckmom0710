@@ -33,6 +33,7 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
     //check return value and password
     if($res != false && password_verify($pass, $res->password)){
       unset($res->password);
+      
       $this->session->set('user', $res);
       return true;
     }
@@ -70,6 +71,8 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
     else
       return true;
   }
+  
+  
   
   
   /*public function getLoginForm($action){

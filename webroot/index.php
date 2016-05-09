@@ -8,6 +8,11 @@ $app->url->setUrlType(\Anax\Url\CUrl::URL_CLEAN);
 $app->navbar->configure(ANAX_APP_PATH . 'config/navbar.php');  
 $app->theme->configure(ANAX_APP_PATH . 'config/theme.php');
 
+
+$usr = new \Anax\UVC\CUserBase('user');
+$usr->setDI($di);
+$app->theme->setVariable('userinfo', $usr->getUserInfo());
+
 //landing page---------------------------------------------------------------------------
 $app->router->add('', function() use ($app,$di) {
   

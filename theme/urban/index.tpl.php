@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    
 
 <div id='wrapper'>
         
@@ -35,8 +36,51 @@
             <span class="icon-bar"></span>
           </button>
         </div>
+          
+       <nav class="sswsnav navbar-collapse navbar-right collapse">
+         
+       <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <strong><?=$userinfo->acronym?></strong>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu user-dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="text-center">  
+                                    <img class="icon-size" src="http://www.gravatar.com/avatar/<?php md5(strtolower(trim($userinfo->acronym)));?>?s=90&d=identicon">
+                                           
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-center"><strong><?=$userinfo->name?></strong></p>
+                                        <p class="text-center small"><?=$userinfo->email?></p>
+                                        <p class="text-left">
+                                            <a href="#" class="btn btn-primary btn-block btn-sm">Användarprofil</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider navbar-login-session-bg"></li>
+                         
+            
+            <li><a href="#">Användarstatistik <span class="glyphicon glyphicon-stats pull-right"></span></a></li>      
+            <li class="divider"></li>
+            <li><a href="./logout">Logga ut <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                    </ul>
+                </li>
+            </ul>
+       </nav>
+          
      
         <?php $this->views->render('navbar');?>
+          
+        
           
        </div><!-- end container --> 
     </div><!-- end navbar --> 
