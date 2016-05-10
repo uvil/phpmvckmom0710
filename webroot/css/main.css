@@ -19,9 +19,10 @@ body{
 	font-size: 1.2em;
 	font-weight: 300;
 	color:white;
+        height: 54px;
 }
 
-.logo{margin: 10px; }
+
 
 .headersubBan{
 	text-align: center;

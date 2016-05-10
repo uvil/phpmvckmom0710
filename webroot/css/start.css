@@ -18,6 +18,10 @@ body{
 	min-height: 44vh;
 }
 
+.logo{
+    margin-top: 4px;
+}
+
 
 
 .welcome h1{

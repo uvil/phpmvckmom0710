@@ -10,50 +10,55 @@ return [
  
     // Here comes the menu strcture
     'items' => [
-
-        // This is a menu item
-        'home'  => [
-            'text'  => 'Home',
+        
+                // This is a menu item
+        'start'  => [
+            'text'  => 'Start',
             'url'   => $this->di->get('url')->create(''),
-            'title' => 'Home route of current frontcontroller'
+            'title' => 'Översikt av frågor, taggar och användare på webbplatsen'
         ],
         
-        
-
         // This is a menu item
-        'code' => [
-            'text'  =>'Scource',
+        'questions'  => [
+            'text'  => 'Frågor',
+            'url'   => $this->di->get('url')->create('view_questions'),
+            'title' => 'Frågor och svar'
+        ],
+        
+        // This is a menu item
+        'tags'  => [
+            'text'  => 'Taggar',
+            'url'   => $this->di->get('url')->create('view_tags'),
+            'title' => 'Visar alla taggar som används'
+        ],
+        
+        // This is a menu item
+        'users'  => [
+            'text'  => 'Användare',
+            'url'   => $this->di->get('url')->create('view_users'),
+            'title' => 'Visar webbplatsens alla användare'
+        ],
+        
+        // This is a menu item
+        'about'  => [
+            'text'  => 'Om webbplatsen',
+            'url'   => $this->di->get('url')->create('about'),
+            'title' => 'Information om webbplatsen och om mig'
+        ],
+        
+        // This is a menu item
+        'source' => [
+            'text'  =>'Källkod',
             'url'   => $this->di->get('url')->create('source'),
-            'title' => 'Internal route within this frontcontroller'
+            'title' => 'Granska denna webbplats källkod'
         ],
-        
-        // This is a menu item
-        'user_info' => [
-            'text'  =>'User info',
-            'url'   => $this->di->get('url')->create('user_info'),
-            'title' => 'Internal route within this frontcontroller'
-        ],
-        
-        // This is a menu item
-        'login' => [
-            'text'  =>'Login',
-            'url'   => $this->di->get('url')->create('loginform'),
-            'title' => 'Internal route within this frontcontroller'
-        ],
-        
-        // This is a menu item
-        'logout' => [
-            'text'  =>'Logout',
-            'url'   => $this->di->get('url')->create('logout'),
-            'title' => 'Internal route within this frontcontroller'
-        ],
-        
+               
         
         // This is a menu item
         'reports' => [
-            'text'  =>'Reports',
+            'text'  =>'Rapporter',
             'url'   => $this->di->get('url')->create('redovisning'),
-            'title' => 'Internal route within this frontcontroller'
+            'title' => 'Rapporter för denna BTH-kurs'
         ],
         
        

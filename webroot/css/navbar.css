@@ -94,6 +94,15 @@
     font-size: 87px;
 }
 
+.logo{
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.logo:hover{
+    color: #999;
+}
+
 /* Just to sho off how class works 
 .navbar li .italic {
   font-style: italic;

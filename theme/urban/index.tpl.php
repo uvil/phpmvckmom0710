@@ -21,13 +21,17 @@
         
     
 <div class="headerban clearfix">
+   <div class="navbar" role="navigation">
+       <div class="container">
+       
+           <a class="pull-left logo" style="width:300px;" href="./">Svenska <span class="orange">StarWars</span>Sällskapet</a> 
     
-    <div class="pull-left logo">Svenska <span class="orange">StarWars</span>Sällskapet</div> 
+  
     
 <?php if ($this->views->hasContent('navbar') && !isset($hidenav)):?>
-   <div class="navbar" role="navigation">
+   
       
-      <div class="container">
+      
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -79,13 +83,12 @@
           
      
         <?php $this->views->render('navbar');?>
-          
-        
-          
-       </div><!-- end container --> 
-    </div><!-- end navbar --> 
+             
           
 <?php endif;?>
+    
+    </div><!-- end container --> 
+    </div><!-- end navbar --> 
     
 </div> 
     
