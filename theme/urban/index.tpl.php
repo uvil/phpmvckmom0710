@@ -56,7 +56,7 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <p class="text-center">  
-                                    <img class="icon-size" src="http://www.gravatar.com/avatar/<?php md5(strtolower(trim($userinfo->acronym)));?>?s=90&d=identicon">
+                                    <img class="icon-size" src="http://www.gravatar.com/avatar/<?php md5(strtolower(trim($userinfo->email)));?>?s=90&d=identicon">
                                            
                                         </p>
                                     </div>
@@ -64,7 +64,7 @@
                                         <p class="text-center"><strong><?=$userinfo->name?></strong></p>
                                         <p class="text-center small"><?=$userinfo->email?></p>
                                         <p class="text-left">
-                                            <a href="#" class="btn btn-primary btn-block btn-sm">Användarprofil</a>
+                                            <a href="./profile" class="btn btn-primary btn-block btn-sm">Användarprofil</a>
                                         </p>
                                     </div>
                                 </div>

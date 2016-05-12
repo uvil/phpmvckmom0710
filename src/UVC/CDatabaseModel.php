@@ -102,6 +102,7 @@ class CDatabaseModel implements \Anax\DI\IInjectionAware
          $keys,
          "id = ?"
      );
+     
 
      return $this->db->execute($values);
  }

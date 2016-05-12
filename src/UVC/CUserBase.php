@@ -19,6 +19,38 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
       $this->usersTableName=$tableName;
   }
   
+  public function updateSession($name){
+   
+        //get database entry
+    $this->db->select('name, acronym, email')
+              ->from($this->usersTableName)
+              ->where("acronym=?");
+    
+    $this->db->execute([$name]);
+     
+    $res = $this->db->fetchOne();
+    
+    $this->session->set('user', $res);
+  }
+  
+  public function verifyPassword($pass,$id)
+  {
+     //get database entry
+    $this->db->select('password')
+              ->from($this->usersTableName)
+              ->where("id=?");
+    
+    $this->db->execute([$id]);
+     
+    $res = $this->db->fetchOne();
+    
+    
+    if(password_verify($pass, $res->password))
+      return true;
+    else
+      return false;
+  }
+  
   public function logIn($name=null, $pass=null){
     
     //get database entry
@@ -42,7 +74,8 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
       return false;
     }
   }
-  
+    
+    
   public function logOut(){
     
     //unload user from session
@@ -60,6 +93,23 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
     return $usrSes;
    else
      return false;
+  }
+  
+  public function getAllUserInfo(){
+     //load user from session
+   $acronym =  $this->session->get('user',[])->acronym;
+   
+   
+    //get database entry
+    $this->db->select('*')
+              ->from($this->usersTableName)
+              ->where("acronym=?");
+    
+    $this->db->execute([$acronym]);
+     
+    $res = $this->db->fetchOne();
+
+    return $res;
   }
   
   public function isAuthorised(){
@@ -136,7 +186,7 @@ HTML;
   {
     
      $this->db->select('count(*) as posts')
-              ->from('user')//$this->getSource()
+              ->from($this->usersTableName)//$this->getSource()
               ->where("acronym = ?");
 
      $this->db->execute([$acronym]);
@@ -156,7 +206,7 @@ HTML;
     $values = array_values($data);
 
     $this->db->insert(
-       'user',
+       $this->usersTableName,
        $keys
     );
 
@@ -164,6 +214,33 @@ HTML;
      
      return $res;
   }
+  
+  public function updateuser($data=[])
+  {  
+    $keys   = array_keys($data);
+    $values = array_values($data);
+    
+    $values[] = $data['id'];
+    unset($keys['id']);
+
+    $this->db->update(
+       $this->usersTableName,
+       $keys,
+       "id = ?"    
+    );
+    
+    //echo $this->db->getSQL();
+    //die();
+    
+    
+  
+   $res = $this->db->execute($values);
+      
+    return $res;
+  }
+  
+  
+
   
   
   

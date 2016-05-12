@@ -13,6 +13,7 @@ $usr = new \Anax\UVC\CUserBase('user');
 $usr->setDI($di);
 $app->theme->setVariable('userinfo', $usr->getUserInfo());
 
+
 //landing page---------------------------------------------------------------------------
 $app->router->add('', function() use ($app,$di) {
   
@@ -69,7 +70,7 @@ $app->router->add('apply',function() use($app){
   $app->views->add('ssws/apply',['returnlink'=>$return,'message'=>$message]);
 });
 
-// route used when login submit----------------------------------------------------------
+// route used when creating a new user ---------------------------------------------------------
 $app->router->add('applysubmit', function() use ($app, $di) {
   $app->theme->setVariable('title', "Registration process");
   $app->theme->setVariable('hidenav',true);
@@ -94,9 +95,17 @@ $app->router->add('applysubmit', function() use ($app, $di) {
           'acronym'   => $acro,
           'email'     => $app->request->getPost('usrmail'),
           'name'      => $app->request->getPost('usrname'),
-          "password"  =>  password_hash($pass, PASSWORD_DEFAULT),
+          "password"  => password_hash($pass, PASSWORD_DEFAULT),
           "created"   => $now,
-          "active"    => $now
+          "active"    => $now,
+          "webbpage"  => "http://dbwebb.se/",
+          "title"     => "Webbprogrammerare",
+          "subtitle"  => "Student vid Blekinge tekniska högskola (BTH)",
+          "facebook"  => "https://www.facebook.com/",
+          "twitter"   => "https://twitter.com/",
+          "hobbies"   => "Webbutveckling, Heminredning, Fysisk träning, Resor, Filmer",
+          "skills"    => "Tala 65%\nLäsa 90%\nSkriva 85%\nSova 70%"
+          
       ];
       
       $res = $usr->saveuser($data);
@@ -111,6 +120,86 @@ $app->router->add('applysubmit', function() use ($app, $di) {
   
   
 });
+
+//view user profile ---------------------------------------------------------------------
+$app->router->add('profile', function() use ($app, $usr) {
+  $userinfo = $usr->getAllUserInfo();
+  $app->theme->setVariable('title', "Användarprofil");
+  $app->theme->addStylesheet('css/profile.css');
+  $app->views->add('ssws/viewprofile',['userinfo'=>$userinfo]);
+});
+
+//edit user profile ---------------------------------------------------------------------
+$app->router->add('editprofile', function() use ($app, $usr) {
+  $userinfo = $usr->getAllUserInfo();
+  $app->theme->setVariable('title', "Användarprofil");
+  $app->theme->addStylesheet('css/profile.css');
+  $app->views->add('ssws/editprofile',['userinfo'=>$userinfo]);
+});
+
+
+//save user profile ---------------------------------------------------------------------
+$app->router->add('saveprofile', function() use ($app, $usr) {
+
+  $now = gmdate("Y-m-d H:i:s");
+      
+      $data = [
+          'id'        => $app->request->getPost('id'),
+          'acronym'   => $app->request->getPost('akronym'),
+          'email'     => $app->request->getPost('email'),
+          'name'      => $app->request->getPost('name'),
+          "updated"    => $now,
+          "webbpage"  => $app->request->getPost('webbpage'),
+          "title"     => $app->request->getPost('title'),
+          "subtitle"  => $app->request->getPost('subtitle'),
+          "facebook"  => $app->request->getPost('facebook'),
+          "twitter"   => $app->request->getPost('twitter'),
+          "hobbies"   => $app->request->getPost('hobbies'),
+          "skills"    => $app->request->getPost('skills'),
+          
+      ];
+           
+      $res = $usr->updateuser($data);
+      $usr->updateSession($data[acronym]);
+      
+      $app->redirectTo("profile");
+ 
+});
+
+//edit user password ---------------------------------------------------------------------
+$app->router->add('editpassword', function() use ($app, $usr) {
+  $msg = $app->request->getGet('m');
+  $userinfo = $usr->getAllUserInfo();
+  $app->theme->setVariable('title', "Användarprofil");
+  $app->theme->addStylesheet('css/profile.css');
+  $app->views->add('ssws/editpassword',['userinfo'=>$userinfo,'msg'=>$msg]);
+});
+
+//save new user password --------------------------------------------------------------
+$app->router->add('savenewpassword', function() use ($app, $usr) {
+ 
+  $id = $app->request->getPost('id');
+  $oldpass = $app->request->getPost('oldpass');
+  $newpass = $app->request->getPost('newpass');
+  $newpass2 = $app->request->getPost('newpass2');
+   
+  if($newpass != $newpass2)
+  {
+     $app->redirectTo("editpassword?m=Nytt lösenord matchar inte upprepningen. <br/>Var vänlig och försök igen!");
+  }
+  else if(!$usr->verifyPassword($oldpass,$id))
+  {
+    $app->redirectTo("editpassword?m=Föregående lösenord matchar inte. <br/>Du tillåts därför inte att ange ett nytt.<br/>Försök igen?");
+  }
+  else
+  {
+    $data = ['id' => $id,'password' => password_hash($newpass, PASSWORD_DEFAULT)]; 
+    $res = $usr->updateuser($data);  
+    $app->redirectTo("editpassword?m=Nytt lösenord sparat!");
+  }
+ 
+});
+
 
 $app->router->add('user_info', function() use ($app, $di) {
   $app->theme->setVariable('title', "User Info");
