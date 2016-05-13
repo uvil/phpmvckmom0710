@@ -40,6 +40,13 @@ return [
         ],
         
         // This is a menu item
+        'newquestion'  => [
+            'text'  => 'Ny fråga',
+            'url'   => $this->di->get('url')->create('newquestion'),
+            'title' => 'Fråga en ny fråga'
+        ],
+        
+        // This is a menu item
         'about'  => [
             'text'  => 'Om webbplatsen',
             'url'   => $this->di->get('url')->create('about'),

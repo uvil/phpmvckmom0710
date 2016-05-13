@@ -10,6 +10,12 @@ require __DIR__.'/config.php';
 // Create services and inject into the app. 
 $di  = new \Anax\DI\CDIFactoryDefault();
 
+$di->set('QuestionController', function() use ($di) {
+    $c = new \Phpmvc\Question\QuestionController();
+    $c->setDI($di);
+    return $c;
+});
+
 
 $di->setShared('db', function() {
     $db = new \Anax\UVC\CDatabaseBasic();

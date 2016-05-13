@@ -2,7 +2,7 @@
 
 			<div class="footer-left">
 
-			<img src="img/jedi_order_logo.png" alt="logo bild">
+			<img src="http://localhost/phpmvc/kmom0710/webroot/img/jedi_order_logo.png" alt="logo bild">
 				<h3>Svenska StarWarsSällskapet<br/><span>SSWS</span></h3>
 
 				<p class="footer-links">
