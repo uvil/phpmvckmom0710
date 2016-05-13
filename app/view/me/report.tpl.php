@@ -1,11 +1,9 @@
-<article class="article1">
+<div class="panel panel-default" style="min-height:800px;">
+	<div class="panel-body">		
+      <div class="mypanel">
  
-<?=$content?>
- 
-<?php if(isset($byline)) : ?>  
-  <footer class="byline">
-    <?=$byline?>
-  </footer>  
-<?php endif; ?>
- 
-</article>
+        <?=$content?>
+
+      </div>
+  </div>
+</div>

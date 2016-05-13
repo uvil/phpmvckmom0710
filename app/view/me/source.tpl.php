@@ -1,17 +1,15 @@
-<article class="article1">
-    
-<?php if(isset($h1)) : ?>  
-    <?=$h1?>  
-<?php endif; ?>
+<div class="panel panel-default" style="min-height:800px;">
+	<div class="panel-body">		
+      <div class="mypanel">
+			
+      <div class="row" style="margin-bottom: 20px;">
+				<h3>Källkod</h3>
+			</div>
 
-<?php if(isset($content)) : ?> 
-<?=$content?>
-<?php endif; ?>
- 
-<?php if(isset($byline)) : ?>  
-  <footer class="byline">
-    <?=$byline?>
-  </footer>  
-<?php endif; ?>
- 
-</article>
+      <?php if(isset($content)) : ?> 
+      <?=$content?>
+      <?php endif; ?>
+
+      </div>
+  </div>
+</div>

@@ -200,26 +200,24 @@ $app->router->add('savenewpassword', function() use ($app, $usr) {
  
 });
 
+// view information about me and this website --------------------------------
+$app->router->add('about',function() use($app){
+  
+  // Prepare the page content
+  $app->theme->addStylesheet('css/aboutme.css');
+  $app->theme->setVariable('title', "Om webbplatsen");
 
-$app->router->add('user_info', function() use ($app, $di) {
-  $app->theme->setVariable('title', "User Info");
-  
-  $usr = new \Anax\UVC\CUserBase('user');
-  $usr->setDI($di);
-  
-  ob_start();
-  
-  var_dump($usr->getUserInfo());
-  $html = "<h4>getUserInfo:</h4><p><pre>" . ob_get_clean(). "</pre>";
-  $html .= "<hr><p>&nbsp;</p>";
-  
-  var_dump($usr->isAuthorised());
-  $html .= "<h4>isAuthorised:</h4><p><pre>" . ob_get_clean() . "</pre>";
-  
-  $html .= "<hr><p>&nbsp;</p>"; 
-  
-  $app->theme->setVariable('main',$html);
+  $site = $app->fileContent->get('aboutsite.md');
+  $site = $app->textFilter->doFilter($site,'markdown');
+  $content = $app->fileContent->get('aboutme.md');
+  $content = $app->textFilter->doFilter($content,'markdown');
+  $byline  = $app->fileContent->get('byline.md');
+  $byline = $app->textFilter->doFilter($byline,'markdown');
+ 
+  $app->views->add('ssws/about', ['img'=>'uv.png','site'=>$site, 'content'=>$content,'byline'=>$byline]);
+
 });
+
 
 // route used when login submit----------------------------------------------------------
 $app->router->add('loginsubmit', function() use ($app, $di) {
