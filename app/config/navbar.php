@@ -42,7 +42,7 @@ return [
         // This is a menu item
         'newquestion'  => [
             'text'  => 'Ny fråga',
-            'url'   => $this->di->get('url')->create('newquestion'),
+            'url'   => $this->di->get('url')->create('question/new'),
             'title' => 'Fråga en ny fråga'
         ],
         
