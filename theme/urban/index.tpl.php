@@ -42,8 +42,14 @@
         </div>
           
        <nav class="sswsnav navbar-collapse navbar-right collapse">
+           
+           <ul class="display-sm">   
+              <li><a href="#">Användarprofil</a></li>      
+              <li><a href="#">Användarstatistik </a></li>      
+              <li><a href="./logout">Logga ut </a></li>
+           </ul>
          
-       <ul>
+           <ul class="usermenu">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
