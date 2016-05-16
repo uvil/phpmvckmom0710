@@ -2,10 +2,7 @@
 
 namespace Anax\UVC;
  
-/**
- * Model for Users.
- *
- */
+
 class CDatabaseModel implements \Anax\DI\IInjectionAware
 {
     use \Anax\DI\TInjectable;

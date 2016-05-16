@@ -10,6 +10,18 @@ require __DIR__.'/config.php';
 // Create services and inject into the app. 
 $di  = new \Anax\DI\CDIFactoryDefault();
 
+$di->set('Questions', function() use ($di) {
+    $c = new \Phpmvc\Question\Questions();
+    $c->setDI($di);
+    return $c;
+});
+
+$di->set('Tags', function() use ($di) {
+    $c = new \Phpmvc\Tag\Tags();
+    $c->setDI($di);
+    return $c;
+});
+
 $di->set('QuestionController', function() use ($di) {
     $c = new \Phpmvc\Question\QuestionController();
     $c->setDI($di);
@@ -23,6 +35,8 @@ $di->setShared('db', function() {
     $db->connect();
     return $db;
 });
+
+
 
 
 //$app = new \Anax\Kernel\CAnax($di);
