@@ -11,13 +11,15 @@
                 <div class="row">
               <h3>Ny fråga</h3>
             </div>
-              
+             
+                 <input type="hidden" name="userid" value="<?=$userid;?>">
+             
               <div class="form-group" style="margin-top: 20px;">
 							<label for="name" class="control-label">Frågerubrik</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-question-circle fa" aria-hidden="true"></i></span>
-                  <input type="text" class="form-control" name="heading" id="heading" required="required" autofocus="autofocus" value="Namnfråga"/>
+                  <input type="text" class="form-control" name="heading" id="heading" required="required" autofocus="autofocus" value="Redux App Structure - Where to place services / business logic?"/>
 								</div>
 							</div>
 						</div>
@@ -29,7 +31,9 @@
 								<div class="input-group">
 									<span class="input-group-addon vertical-align-top"><i class="fa fa-file-text" aria-hidden="true"></i></span>
 									<textarea style="height:300px" class="form-control" name="text" id="text" required="required" />
-Varför heter en av hjältarna Luke?
+I'm writing my first Redux app and doing the initial rounds like choosing the boilerplate and understanding its structure. I've found a very good one called react-redux-starter-kit.
+
+I'll need to write a notification client, fed by an API (in every X minutes it queries the API for notifications - it might be replaced by a websocket solution later). It won't have route specific visibility - it'll be always seen in the header bar. Considering the starter kit above, where would be the best to place its codebase? I'm coming from a Symfony2 world and I'd put the business logic in a class called Notification into a src/services folder:
 									</textarea>
 								</div>
 							</div>
@@ -40,7 +44,7 @@ Varför heter en av hjältarna Luke?
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-tags" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="tags" id="tags" required="required" value="En-fråga som-är omöjlig-att veta-svaret på"/>
+									<input type="text" class="form-control" name="tags" id="tags" required="required" value="javascript redux directory-structure"/>
 								</div>
 							</div>
 						</div>

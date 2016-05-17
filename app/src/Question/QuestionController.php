@@ -25,9 +25,10 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     $heading = $this->request->getPost('heading');
     $text = $this->request->getPost('text');
     $tags = $this->request->getPost('tags');
+    $u_id = $this->request->getPost('userid');
     
     //if sent - save to DB
-    if($heading!=null && $text!=null && $tags!=null)
+    if($heading!=null && $text!=null && $tags!=null && $u_id!=null)
     {
       $tags = explode(" ", trim($tags));
       foreach ($tags as $tag) {
@@ -35,16 +36,24 @@ class QuestionController implements \Anax\DI\IInjectionAware {
       }
       
       
-      $question = ['heading' => $heading,'text' => $text];
-      /*if($this->Questions->save($question)){
-        echo "Ny fråga sparad";
-      }*/
+      $question = ['heading' => $heading,'text' => $text,'created'=>gmdate("Y-m-d H:i:s")];
+      $this->Questions->saveQuestion($question,$u_id);
+      
+
+
+       //redirect to questions 
+      
+      
       
     }
     else
     {
+      $usr = new \Anax\UVC\CUserBase('user');
+      $usr->setDI($this->di);
+      $userid = $usr->getAllUserInfo()->id;
+  
       $this->theme->setTitle('Ny fråga');
-      $this->views->add('question/newquestion');
+      $this->views->add('question/newquestion',['userid'=>$userid]);
     }
     
     
@@ -52,7 +61,12 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   }
   
   public function allAction(){
-    $this->views->add('question/viewall');
+    
+    $questions = $this->Questions->getAll();
+    
+    $this->theme->addStylesheet("css/questions.css");
+    $this->theme->setTitle('Alla frågor');
+    $this->views->add('question/viewall',['questions'=>$questions]);
   }
   
   

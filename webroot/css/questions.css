@@ -1,0 +1,54 @@
+.questionrow{
+    padding: 20px; 
+    color: #777;
+}
+
+.questionrow:hover{
+    background: #f9f9f9;
+}
+
+.date, .rank{ text-align: center; border: 1px solid #444; max-width: 120px; min-width: 50px;
+      padding-left: 0px !important; border-radius: 5px; overflow: hidden; padding-bottom: 10px;
+ background: white; height: 120px;}
+
+.date .month{
+    padding: 5px;
+    background: #444;
+    font-size: 1.3em;
+    color: white;
+}
+
+.date .day{ padding:10px; font-size: 1.8em; padding-bottom:0px;}
+
+.rank{
+    padding-top:10px;
+    background: #444;
+    color: white;
+}
+
+.rank .txt{ }
+
+.rank .nr{ font-size: 1.4em; line-height:1.2em;}
+
+.rank .divide{ line-height: 9px;}
+
+.title{
+    font-size: 2em;
+    color: #555;
+    margin-top: 0.2em;
+    margin-bottom: 0.3em;
+}
+
+.gravatar{
+    width: 95px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+@media(max-width:1100px){  
+    .rankinfo{display: none !important;}
+    .dateinfo{display: none !important;}
+    .gravatarinfo{display: none !important;}
+}
+
+

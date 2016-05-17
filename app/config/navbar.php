@@ -21,8 +21,8 @@ return [
         // This is a menu item
         'questions'  => [
             'text'  => 'Frågor',
-            'url'   => $this->di->get('url')->create('view_questions'),
-            'title' => 'Frågor och svar'
+            'url'   => $this->di->get('url')->create('question/all'),
+            'title' => 'Visa alla frågor'
         ],
         
         // This is a menu item
