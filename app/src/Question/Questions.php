@@ -16,8 +16,16 @@ class Questions extends \Anax\UVC\CDatabaseModel
     }
      */
   
-     public function getAll($columns = '*') {
-       $this->db->select('heading,text,questions.created,name,email')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');
+     public function getBySlug($slug)
+     {
+       $this->db->select('*')->from('questions')->where("slug=?");
+       $this->db->execute([$slug]);
+       $qs = $this->db->fetchOne();
+       return $qs;
+     }
+  
+     public function getAll() {
+       $this->db->select('heading,text,questions.created,name,email,slug')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');
        
        //echo $this->db->getSQL(). "<br>";
        
@@ -30,14 +38,31 @@ class Questions extends \Anax\UVC\CDatabaseModel
      
      public function saveQuestion($values=[],$u_id){
        
+      //add slug
+      $values['slug']=$this->slugify($values['heading']);
+       
       parent::save($values);
       
-      //save realtion
+      //save relation
       $q_id = $this->db->lastInsertId(); 
       $this->db->execute("INSERT INTO user_question(user,question) VALUES (?,?)",[$u_id,$q_id]);
       
       echo "Fråga tillagd...";
      }
+     
+     /**
+ * Create a slug of a string, to be used as url.
+ *
+ * @param string $str the string to format as slug.
+ * @returns str the formatted slug. 
+ */
+     private function slugify($str) {
+        $str = mb_strtolower(trim($str));
+        $str = str_replace(array('å','ä','ö'), array('a','a','o'), $str);
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = trim(preg_replace('/-+/', '-', $str), '-');
+        return $str;
+      }
   
    
 }

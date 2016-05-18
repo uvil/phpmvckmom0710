@@ -14,9 +14,17 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     $this->viewAction();
   }
   
-  public function viewAction(){
+  public function viewAction($params=null){
+    
+    $res = $this->Questions->getBySlug($params);
+    
     $this->theme->setTitle('Visa fråga');
-    $this->views->add('question/viewone');
+    $this->theme->addStylesheet("css/viewone.css");
+    
+    if($params==null || $res==null)
+     $this->views->add('question/noone');
+    else
+      $this->views->add('question/viewone',['question'=>$res]);
   }
   
   public function newAction(){

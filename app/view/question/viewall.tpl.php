@@ -15,7 +15,7 @@
                     $day = date('d',$timestamp); 
                     $year = date('Y',$timestamp); 
                 ?>
-                <a href="#">
+                <a href="view/<?=$question->slug?>">
                 <div class="row questionrow">
                     <div class="col-xs-1 dateinfo">
                         <div class="date">

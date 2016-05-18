@@ -1,0 +1,19 @@
+.uvtron{
+    padding: 30px 20px;
+    border-radius: 5px;
+}
+
+.uvtron h2{
+    padding: 0px 20px; 
+    color: #444;
+}
+
+.uvtron p{
+    color: #555;
+    font-size: 1.1em;
+}
+
+.form-group{
+    padding: 0 15px;
+}
+
