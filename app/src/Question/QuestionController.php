@@ -14,14 +14,21 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     $this->viewAction();
   }
   
-  public function viewAction($params=null){
-    
+ 
+  
+  public function slugAction($params=null){
     $res = $this->Questions->getBySlug($params);
+    $this->viewAction($res);
+  }
+  
+  private function viewAction($res=null){
+    
+    //$res = $this->Questions->getBySlug($params);
     
     $this->theme->setTitle('Visa fråga');
     $this->theme->addStylesheet("css/viewone.css");
     
-    if($params==null || $res==null)
+    if($res==null)
      $this->views->add('question/noone');
     else
       $this->views->add('question/viewone',['question'=>$res]);
@@ -63,14 +70,28 @@ class QuestionController implements \Anax\DI\IInjectionAware {
       $this->theme->setTitle('Ny fråga');
       $this->views->add('question/newquestion',['userid'=>$userid]);
     }
+
     
+  } 
+  
+  public function userAction($params=null){
+   
     
+    if($id=intval($params)==0)
+      die("User id (int) required as param");
     
+    $res = $this->Questions->getByUserId($params);
+    $this->allAction($res);
   }
   
-  public function allAction(){
+  public function allAction($questionsToDisplay=null){
     
-    $questions = $this->Questions->getAll();
+    if(is_array($questionsToDisplay) && count($questionsToDisplay)==0)
+      $questions = [];
+    else if($questionsToDisplay==null)
+      $questions = $this->Questions->getAll();
+    else
+      $questions = $questionsToDisplay;
     
     $this->theme->addStylesheet("css/questions.css");
     $this->theme->setTitle('Alla frågor');

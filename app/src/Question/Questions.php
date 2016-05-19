@@ -23,6 +23,17 @@ class Questions extends \Anax\UVC\CDatabaseModel
        $qs = $this->db->fetchOne();
        return $qs;
      }
+     
+     public function getByUserId($id){
+       
+        $this->db->select()->from('questions')->leftJoin("user_question","question=questions.id")->leftJoin('user','user=user.id')->where('user=?');
+        
+        
+        $this->db->execute([$id]);
+        $res = $this->db->fetchAll();
+        
+        return $res;
+     }
   
      public function getAll() {
        $this->db->select('heading,text,questions.created,name,email,slug')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');

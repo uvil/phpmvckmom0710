@@ -95,6 +95,15 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
      return false;
   }
   
+  public function getAllUsers(){
+    
+    $this->db->select()->from($this->usersTableName);
+    $this->db->execute(); 
+    $res = $this->db->fetchAll();
+
+    return $res;
+  }
+  
   public function getAllUserInfo(){
      //load user from session
    $acronym =  $this->session->get('user',[])->acronym;

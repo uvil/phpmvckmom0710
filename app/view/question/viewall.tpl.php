@@ -5,9 +5,19 @@
         <div class="panel-body">
             
             <div class="mypanel">
+                <?php if(count($questions)==0):?>
+                <div class="row questionrow">
+                  <div class="jumbotron uvtron">
+                    <h2 class="text-center">Frågorna du söker saknas.
+                        <div class="small" style="margin-top: 10px;"> (Har användaren ställt några frågor?)</div></h2> 
+                </div>    
+              <?php else: ?>
+                    
+                <div class="row"><h3>Alla frågor 
+                        <span class="small">(Varje rad/fråga är en klickbar länk)</span></h3>
+                </div>
                 
-                <div class="row"><h3>Alla frågor</h3></div>
-                
+              
                 <?php foreach ($questions as $question):?>
                 <?php 
                     $timestamp = strtotime($question->created);
@@ -15,7 +25,7 @@
                     $day = date('d',$timestamp); 
                     $year = date('Y',$timestamp); 
                 ?>
-                <a href="view/<?=$question->slug?>">
+                <a href="slug/<?=$question->slug?>">
                 <div class="row questionrow">
                     <div class="col-xs-1 dateinfo">
                         <div class="date">
@@ -62,9 +72,10 @@
                     
                    
                 </div>
+                    <hr>
                 </a>
                 <?php endforeach;?>
-                
+              <?php endif; ?>  
             </div>
         </div>
         </div>
