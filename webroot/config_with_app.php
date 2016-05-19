@@ -28,6 +28,12 @@ $di->set('QuestionController', function() use ($di) {
     return $c;
 });
 
+$di->set('user', function() use ($di) {
+$usr = new \Anax\UVC\CUserBase('user');
+$usr->setDI($di);
+$usr->getUserInfo();
+return $usr;
+});
 
 $di->setShared('db', function() {
     $db = new \Anax\UVC\CDatabaseBasic();

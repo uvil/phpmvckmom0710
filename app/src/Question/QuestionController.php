@@ -23,7 +23,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   
   private function viewAction($res=null){
     
-    //$res = $this->Questions->getBySlug($params);
+    $userid = $this->user->getUserInfo()->id;
     
     $this->theme->setTitle('Visa fråga');
     $this->theme->addStylesheet("css/viewone.css");
@@ -31,7 +31,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     if($res==null)
      $this->views->add('question/noone');
     else
-      $this->views->add('question/viewone',['question'=>$res]);
+      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid]);
   }
   
   public function newAction(){

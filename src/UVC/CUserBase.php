@@ -54,7 +54,7 @@ class CUserBase extends \Anax\UVC\CDatabaseModel  {
   public function logIn($name=null, $pass=null){
     
     //get database entry
-    $this->db->select('name, acronym, email,password')
+    $this->db->select('id,name, acronym, email,password')
               ->from($this->usersTableName)
               ->where("acronym=?");
     

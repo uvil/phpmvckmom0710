@@ -23,9 +23,12 @@
                 
                 <div class="row"><h3>Ditt svar</h3></div>
                 
+                
                 <div class="row">
-                    <form method="post replyform">
-                        
+                    <form method="post replyform">   
+                        <input type="hidden" name="userid" value="<?=$userid?>">
+                        <input type="hidden" name="questionid" value="<?=$question->id?>">
+         
                         <div class="form-group">
                          
                           <textarea class="form-control" rows="15" name="reply"></textarea>
