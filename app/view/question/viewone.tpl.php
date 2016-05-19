@@ -25,16 +25,16 @@
                 
                 
                 <div class="row">
-                    <form method="post replyform">   
+                    <form method="post" class="replyform">   
                         <input type="hidden" name="userid" value="<?=$userid?>">
                         <input type="hidden" name="questionid" value="<?=$question->id?>">
          
                         <div class="form-group">
                          
-                          <textarea class="form-control" rows="15" name="reply"></textarea>
+                            <textarea class="form-control" rows="15" name="reply" autofocus="autofocus"></textarea>
 
                         
-                        <div class="text-center"><input type="submit" value="Skicka svar" class="btn btn-orange"></div>
+                            <div class="text-center"><input type="submit" name="replysubmit" value="Skicka svar" class="btn btn-orange"></div>
                         </div>
                     </form>
                   

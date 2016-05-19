@@ -23,6 +23,17 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   
   private function viewAction($res=null){
     
+    //save user reply?
+    if($this->request->getPost("replysubmit")=="Skicka svar"){
+      
+      $data = [ 'text'=>$this->request->getPost("reply"),
+                'userid'=>$this->request->getPost("userid"),
+                'questionid'=>$this->request->getPost("questionid")];
+      
+      $this->Questions->saveReply($data);
+      
+    }
+    
     $userid = $this->user->getUserInfo()->id;
     
     $this->theme->setTitle('Visa fråga');

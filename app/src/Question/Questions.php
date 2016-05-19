@@ -61,6 +61,12 @@ class Questions extends \Anax\UVC\CDatabaseModel
       echo "Fråga tillagd...";
      }
      
+     public function saveReply($data)
+     {
+
+       $this->db->execute("INSERT INTO replies(text, userid, questionid) VALUES (?,?,?)",$data);
+     }
+     
      /**
  * Create a slug of a string, to be used as url.
  *
