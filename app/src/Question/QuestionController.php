@@ -23,6 +23,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   
   private function viewAction($res=null){
     
+    
     //save user reply?
     if($this->request->getPost("replysubmit")=="Skicka svar"){
       
@@ -39,10 +40,17 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     $this->theme->setTitle('Visa fråga');
     $this->theme->addStylesheet("css/viewone.css");
     
+    
+    
     if($res==null)
      $this->views->add('question/noone');
     else
-      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid]);
+    {
+      //get answers
+      $replies = $this->Questions->getReplies($res->id);
+      $this->theme->addJavaScript('js/viewone.js');
+      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid,'replies'=>$replies]);
+    }
   }
   
   public function newAction(){
@@ -96,11 +104,13 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   }
   
   public function allAction($questionsToDisplay=null){
-    
+   
     if(is_array($questionsToDisplay) && count($questionsToDisplay)==0)
       $questions = [];
     else if($questionsToDisplay==null)
+    {
       $questions = $this->Questions->getAll();
+    }
     else
       $questions = $questionsToDisplay;
     

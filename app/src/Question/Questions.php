@@ -63,8 +63,16 @@ class Questions extends \Anax\UVC\CDatabaseModel
      
      public function saveReply($data)
      {
-
        $this->db->execute("INSERT INTO replies(text, userid, questionid) VALUES (?,?,?)",$data);
+     }
+     
+     public function getReplies($questionid){
+       
+       $this->db->select('questionid,text,name,email')->from('replies')->leftJoin('user','userid=user.id')->where('questionid=?');
+       $this->db->execute([$questionid]);
+       $res = $this->db->fetchAll();
+       return $res;
+       
      }
      
      /**

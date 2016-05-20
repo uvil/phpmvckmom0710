@@ -1,6 +1,7 @@
 .uvtron{
     padding: 30px 20px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .uvtron h2{
@@ -16,4 +17,42 @@
 .form-group{
     padding: 0 15px;
 }
+
+
+ 
+.reply{
+        padding: 0px 28px 10px;
+    }
+    
+.addcomment{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    color:#aaa;
+    padding: 3px 8px;
+    display: inline-block;
+}
+
+.addcomment:hover{
+    background: #eee;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
+.mypanel{ height: auto;}
+
+.comment-field-div{ 
+	overflow: hidden; 
+	max-height: 0;
+	transition: max-height 0.4s ease;
+}
+
+.display-field{ 
+	max-height: 500px;
+        transition: max-height 0.4s ease;
+}
+
+.replyinfo{background: #eee; border-radius: 5px; padding: 10px; padding-bottom: 5px; margin-top: 10px; }
+.gravatar{ border-radius: 3px; margin-bottom: 5px;}
+
 
