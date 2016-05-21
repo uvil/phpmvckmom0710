@@ -100,23 +100,36 @@ class QuestionController implements \Anax\DI\IInjectionAware {
       die("User id (int) required as param");
     
     $res = $this->Questions->getByUserId($params);
-    $this->allAction($res);
+    
+    $this->db->execute('Select * from user where id=?',[$params]);
+    $user = $this->db->fetchOne(); 
+    $title = "<strong>{$user->name}s</strong> frågor";
+  
+    $this->allAction($res,$title);
   }
   
-  public function allAction($questionsToDisplay=null){
+  public function allAction($questionsToDisplay=null, $headline=null){
    
     if(is_array($questionsToDisplay) && count($questionsToDisplay)==0)
+    {
       $questions = [];
+      $replycount = 0;
+    }
     else if($questionsToDisplay==null)
     {
       $questions = $this->Questions->getAll();
+      $replycount = $this->Questions->getQuestionCount();
+      $headline = "Visar alla frågor";
     }
     else
+    {
       $questions = $questionsToDisplay;
+      $replycount = $this->Questions->getQuestionCount();
+    }
     
     $this->theme->addStylesheet("css/questions.css");
     $this->theme->setTitle('Alla frågor');
-    $this->views->add('question/viewall',['questions'=>$questions]);
+    $this->views->add('question/viewall',['headline'=>$headline,'questions'=>$questions,'replycount'=>$replycount]);
   }
   
   

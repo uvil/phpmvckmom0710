@@ -1,23 +1,24 @@
+
 <div class="clearfix">
     
     <div class="col-sm-12">
         <div class="panel panel-default" style="margin:10px 0px;">
         <div class="panel-body">
             
-            <div class="mypanel">
-                <?php if(count($questions)==0):?>
-                <div class="row questionrow">
-                  <div class="jumbotron uvtron">
-                    <h2 class="text-center">Frågorna du söker saknas.
-                        <div class="small" style="margin-top: 10px;"> (Har användaren ställt några frågor?)</div></h2> 
-                </div>    
-              <?php else: ?>
-                    
-                <div class="row"><h3>Alla frågor 
+            <div class="mypanel" style="height:auto; min-height: 730px;">
+                
+                <div class="row"><h3><?= $headline ?> 
                         <span class="small">(Varje rad/fråga är en klickbar länk)</span></h3>
                 </div>
                 
-              
+                <?php if(count($questions)==0):?>
+                <div class="row questionrow">
+                    <h2><span class="small" >Han/hon verkar inte ha ställt några frågor...</span></h2> 
+                </div>
+                <hr>
+                   
+              <?php else: ?>
+
                 <?php foreach ($questions as $question):?>
                 <?php 
                     $timestamp = strtotime($question->created);
@@ -26,6 +27,7 @@
                     $year = date('Y',$timestamp); 
                 ?>
                 <a href="slug/<?=$question->slug?>">
+           
                 <div class="row questionrow">
                     <div class="col-xs-1 dateinfo">
                         <div class="date">
@@ -37,10 +39,19 @@
                     <div class="col-xs-1 rankinfo">
                         <div class="rank">
                         <div class="txt">Svar</div>
-                        <div class="nr">21</div>
+                        <div class="nr">
+                          <?php
+                              if(array_key_exists($question->id,$replycount))
+                                echo $replycount[$question->id]; 
+                              else if(array_key_exists($question->question,$replycount))
+                                echo $replycount[$question->question];
+                              else
+                                echo '0';
+                        ?>  
+                        </div>
                         <div class="divide">---</div>
                         <div class="txt">Rank</div>
-                        <div class="nr">13</div>
+                        <div class="nr">0</div>
                         </div>
                     </div>
                     <div class="col-sm-8">

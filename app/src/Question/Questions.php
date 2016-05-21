@@ -36,7 +36,7 @@ class Questions extends \Anax\UVC\CDatabaseModel
      }
   
      public function getAll() {
-       $this->db->select('heading,text,questions.created,name,email,slug')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');
+       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');
        
        //echo $this->db->getSQL(). "<br>";
        
@@ -45,6 +45,18 @@ class Questions extends \Anax\UVC\CDatabaseModel
       
        //var_dump($qs);
        return $qs;
+     }
+     
+     public function getQuestionCount()
+     {
+       $this->db->select('questionid as id,count(*) as count')->from('replies')->groupBy('questionid');
+       $this->db->execute();
+       $qs = $this->db->fetchAll();
+       
+       foreach ($qs as $q)
+        $res[$q->id]=$q->count;
+       
+        return $res;
      }
      
      public function saveQuestion($values=[],$u_id){
