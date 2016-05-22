@@ -64,18 +64,21 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     //if sent - save to DB
     if($heading!=null && $text!=null && $tags!=null && $u_id!=null)
     {
-      $tags = explode(" ", trim($tags));
-      foreach ($tags as $tag) {
-        $this->Tags->newTag($tag);
-      }
-      
       
       $question = ['heading' => $heading,'text' => $text,'created'=>gmdate("Y-m-d H:i:s")];
-      $this->Questions->saveQuestion($question,$u_id);
+      $res = $this->Questions->saveQuestion($question,$u_id);
       
-
-
-       //redirect to questions 
+      
+      $tags = explode(" ", trim($tags));
+      foreach ($tags as $tag) {
+        
+        $this->Tags->newTag($tag,$res['id']);
+  
+      }
+      
+      $url = $this->url->create('question/slug') . "/" . $res['slug'];
+      $this->views->add('question/added',['url'=>$url]);
+      
       
       
       
@@ -103,7 +106,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     
     $this->db->execute('Select * from user where id=?',[$params]);
     $user = $this->db->fetchOne(); 
-    $title = "<strong>{$user->name}s</strong> frågor";
+    $title = "<strong>{$user->name}:s</strong> frågor";
   
     $this->allAction($res,$title);
   }
@@ -111,6 +114,8 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   public function allAction($questionsToDisplay=null, $headline=null){
    
      $url =$this->url->create("question/slug");
+     $allusersview =$this->url->create("view_users");
+     
  
        
     if(is_array($questionsToDisplay) && count($questionsToDisplay)==0)
@@ -132,7 +137,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     
     $this->theme->addStylesheet("css/questions.css");
     $this->theme->setTitle('Alla frågor');
-    $this->views->add('question/viewall',['headline'=>$headline,'questions'=>$questions,'replycount'=>$replycount,'url'=>$url]);
+    $this->views->add('question/viewall',['headline'=>$headline,'questions'=>$questions,'replycount'=>$replycount,'url'=>$url,'allusersview'=>$allusersview]);
   }
   
   

@@ -18,6 +18,13 @@
     padding: 0 15px;
 }
 
+.writtenby{
+    padding: 5px;
+    padding-top: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
  
 .reply{

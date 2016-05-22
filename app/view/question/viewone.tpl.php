@@ -9,6 +9,22 @@
               <div class="jumbotron uvtron">
                   <h2><?=$question->heading?></h2>
                   <p><?=$question->text?></p>
+                  
+                  <div class="pull-right col-sm-2 writtenby text-center">
+                      Skriven av: <?=$question->name?>
+                      <?php $src="http://www.gravatar.com/avatar/". md5(strtolower(trim($question->email))). "?s=16&amp;d=identicon"; ?>
+                        <img class="gravatar" src="<?=$src;?>"> 
+                  </div>
+                  
+                  <div class="tags" style="margin-left: 20px;">
+                             <?php 
+                             $tags = explode(',',$question->tags);
+                             foreach($tags as $tag):?>
+                            <span class="label label-default"><?=$tag?></span>
+                             <?php endforeach;?>
+                        </div>
+                  
+                  
               </div>
                 
               <div class="row addcomment">Lägg till kommentar</div>

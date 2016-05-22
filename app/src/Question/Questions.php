@@ -18,7 +18,11 @@ class Questions extends \Anax\UVC\CDatabaseModel
   
      public function getBySlug($slug)
      {
-       $this->db->select('*')->from('questions')->where("slug=?");
+       
+       
+       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug,GROUP_CONCAT(tag) as tags')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy('id')->where('slug=?');
+       
+       
        $this->db->execute([$slug]);
        $qs = $this->db->fetchOne();
        return $qs;
@@ -26,7 +30,8 @@ class Questions extends \Anax\UVC\CDatabaseModel
      
      public function getByUserId($id){
        
-        $this->db->select()->from('questions')->leftJoin("user_question","question=questions.id")->leftJoin('user','user=user.id')->where('user=?');
+        
+        $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug,GROUP_CONCAT(tag) as tags')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy('id')->where('user=?');
         
         
         $this->db->execute([$id]);
@@ -36,7 +41,9 @@ class Questions extends \Anax\UVC\CDatabaseModel
      }
   
      public function getAll() {
-       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id');
+       
+       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug,GROUP_CONCAT(tag) as tags')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy('id');
+       
        
        //echo $this->db->getSQL(). "<br>";
        
@@ -53,6 +60,7 @@ class Questions extends \Anax\UVC\CDatabaseModel
        $this->db->execute();
        $qs = $this->db->fetchAll();
        
+       $res = null;
        foreach ($qs as $q)
         $res[$q->id]=$q->count;
        
@@ -66,11 +74,13 @@ class Questions extends \Anax\UVC\CDatabaseModel
        
       parent::save($values);
       
-      //save relation
+      //save relations
       $q_id = $this->db->lastInsertId(); 
       $this->db->execute("INSERT INTO user_question(user,question) VALUES (?,?)",[$u_id,$q_id]);
       
-      echo "Fråga tillagd...";
+      $res = ['id'=>$q_id,'slug'=>$values['slug']];
+      
+      return $res;
      }
      
      public function saveReply($data)

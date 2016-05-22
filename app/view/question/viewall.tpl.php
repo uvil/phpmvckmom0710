@@ -1,4 +1,3 @@
-
 <div class="clearfix">
     
     <div class="col-sm-12">
@@ -12,14 +11,18 @@
                 </div>
                 
                 <?php if(count($questions)==0):?>
-                <div class="row questionrow">
-                    <h2><span class="small" >Han/hon verkar inte ha ställt några frågor...</span></h2> 
+                <div class="row text-center">
+                    <h2><span class="small" >Verkar inte ha ställt några frågor...</span></h2> 
+                    
                 </div>
                 <hr>
+                
+                <div class="text-center" style="margin-bottom: 30px;"><a class="btn btn-orange" href="<?=$allusersview?>">Välj annan användare</a></div> 
                    
               <?php else: ?>
 
                 <?php foreach ($questions as $question):?>
+                
                 <?php 
                     $timestamp = strtotime($question->created);
                     $month = date('M',$timestamp); 
@@ -42,9 +45,9 @@
                         <div class="txt">Svar</div>
                         <div class="nr">
                           <?php
-                              if(array_key_exists($question->id,$replycount))
+                              if($replycount!=null && array_key_exists($question->id,$replycount))
                                 echo $replycount[$question->id]; 
-                              else if(array_key_exists($question->question,$replycount))
+                              else if(isset($question->question) && array_key_exists($question->question,$replycount))
                                 echo $replycount[$question->question];
                               else
                                 echo '0';
@@ -73,6 +76,15 @@
                                 ?>
                            
                         </div>
+                        
+                       
+                        <div class="tags">
+                             <?php 
+                             $tags = explode(',',$question->tags);
+                             foreach($tags as $tag):?>
+                            <span class="label label-default"><?=$tag?></span>
+                             <?php endforeach;?>
+                        </div>
                     
                     </div>
                     <div class="col-xs-2 pull-right gravatarinfo">
@@ -87,7 +99,10 @@
                     <hr>
                 </a>
                 <?php endforeach;?>
-              <?php endif; ?>  
+              <?php endif; ?> 
+                
+               
+                
             </div>
         </div>
         </div>
