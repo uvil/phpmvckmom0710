@@ -110,6 +110,9 @@ class QuestionController implements \Anax\DI\IInjectionAware {
   
   public function allAction($questionsToDisplay=null, $headline=null){
    
+     $url =$this->url->create("question/slug");
+ 
+       
     if(is_array($questionsToDisplay) && count($questionsToDisplay)==0)
     {
       $questions = [];
@@ -129,7 +132,7 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     
     $this->theme->addStylesheet("css/questions.css");
     $this->theme->setTitle('Alla frågor');
-    $this->views->add('question/viewall',['headline'=>$headline,'questions'=>$questions,'replycount'=>$replycount]);
+    $this->views->add('question/viewall',['headline'=>$headline,'questions'=>$questions,'replycount'=>$replycount,'url'=>$url]);
   }
   
   

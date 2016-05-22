@@ -25,8 +25,9 @@
                     $month = date('M',$timestamp); 
                     $day = date('d',$timestamp); 
                     $year = date('Y',$timestamp); 
-                ?>
-                <a href="slug/<?=$question->slug?>">
+                
+                    ?>
+                <a href="<?=$url?>/<?=$question->slug?>">
            
                 <div class="row questionrow">
                     <div class="col-xs-1 dateinfo">
