@@ -11,6 +11,14 @@ class Tags extends \Anax\UVC\CDatabaseModel{
     else
       return false;
   }
+  
+  public function getAll()
+  {
+    $this->query();
+    $res = $this->execute();
+    return $res;
+    
+  }
     
   
   

@@ -124,7 +124,7 @@ $app->router->add('applysubmit', function() use ($app, $di) {
 //view all users  ---------------------------------------------------------------------
 $app->router->add('view_users', function() use ($app, $usr) {
   $users =  $usr->getAllUsers();
-  $app->theme->setVariable('title', "Användare");
+  $app->theme->setVariable('title', "Alla användare");
   $app->theme->addStylesheet('css/users.css');
   $app->views->add('ssws/viewallusers',['users'=>$users]);
 });

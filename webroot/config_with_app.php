@@ -22,6 +22,13 @@ $di->set('Tags', function() use ($di) {
     return $c;
 });
 
+$di->set('TagsController', function() use ($di) {
+    $c = new \Phpmvc\Tag\TagsController();
+    $c->setDI($di);
+    return $c;
+});
+
+
 $di->set('QuestionController', function() use ($di) {
     $c = new \Phpmvc\Question\QuestionController();
     $c->setDI($di);
