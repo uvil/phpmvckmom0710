@@ -74,7 +74,7 @@
                 
                
                 <div class="row reply">
-                    <div><?=$reply->text?></div>
+                    <div class="reply-text"><?=$reply->text?></div>
                     <div class="col-sm-2 col-sm-offset-10 col-xs-6 col-xs-offset-6 text-center replyinfo">Skrivet av: <strong><?=$reply->name?></strong>   
                      <?php $src="http://www.gravatar.com/avatar/". md5(strtolower(trim($reply->email))). "?s=16&amp;d=identicon"; ?>
                         <img class="gravatar" src="<?=$src;?>"> 
@@ -83,8 +83,35 @@
                     </div>
                   </div>
                 
-                <div class="row addcomment">Lägg till kommentar</div>
-                <div class="comment-field-div"><textarea class="form-control" rows="5" placeholder="Skriv din kommentar här..."></textarea></div>
+                 <hr style="margin-top:5px;">
+                 
+                <div class="row">
+                  <?php 
+                  $comments = explode(',',$repliescomments[$reply->id]['coms']);
+                  foreach ($comments as $com) : ?>
+                 <div style="padding-left: 30px;"> 
+                     <span class="comment-by">Kommentar av <?=$repliescomments[$reply->id]['name']?>: </span><?=$com?>
+                 </div>
+                  <hr>
+                    <?php endforeach;?>
+                </div>
+             
+              
+             <div class="row addcomment">Lägg till kommentar</div>
+             
+              <div class="comment-field-div">
+                  <form method="post">
+                  
+                  <input type="hidden" name="replyid" value="<?=$reply->id?>">
+                  <input type="hidden" name="userid" value="<?=$userid?>">
+                      
+                  <textarea class="form-control" name="comment" rows="5" placeholder="Skriv din kommentar här..." required="required"></textarea>
+                  <div class="text-center">
+                      <input type="submit" value="Spara kommentar" name="commentsubmit" class="btn btn-orange">
+                  </div>
+                  </form>
+              </div>
+
                 <hr style="margin-top:5px;">
               <?php endforeach;?>
               

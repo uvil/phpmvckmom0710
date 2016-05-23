@@ -69,8 +69,9 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     {
       $questioncomments = $this->Comments->getByQuestionId($res->id);
       $replies = $this->Questions->getReplies($res->id);
+      $repliescomments = $this->Questions->getRepliesComments($res->id);
       $this->theme->addJavaScript('js/viewone.js');
-      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid,'questioncomments'=>$questioncomments,'replies'=>$replies]);
+      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid,'questioncomments'=>$questioncomments,'replies'=>$replies,'repliescomments'=>$repliescomments]);
     }
   }
   

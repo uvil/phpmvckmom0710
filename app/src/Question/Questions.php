@@ -102,11 +102,29 @@ class Questions extends \Anax\UVC\CDatabaseModel
      
      public function getReplies($questionid){
        
-       $this->db->select('questionid,text,name,email')->from('replies')->leftJoin('user','userid=user.id')->where('questionid=?');
+       $this->db->select('replies.id as id,questionid,text,name,email')->from('replies')->leftJoin('user','userid=user.id')->where('questionid=?');
+       
+ 
        $this->db->execute([$questionid]);
        $res = $this->db->fetchAll();
        return $res;
        
+     }
+     
+     public function getRepliesComments($questionid){
+  
+   
+       
+       $this->db->execute('Select name, replyid ,group_concat(comment) as com from comments join user on user.id=comments.userid where replyid in(select id from replies where questionid=?) group by replyid',[$questionid]);
+       
+       $res = null;
+       while($r = $this->db->fetchOne())
+       {  
+         $res[$r->replyid]['coms']=$r->com;
+         $res[$r->replyid]['name']=$r->name;
+       }
+      
+       return $res;      
      }
      
      /**
