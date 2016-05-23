@@ -96,11 +96,26 @@ class QuestionController implements \Anax\DI\IInjectionAware {
     
   } 
   
+  public function tagAction($params=null){
+    
+    if($id=intval($params)==0)
+      die("Tagid (int) required as param");
+    
+    $res = $this->Questions->getByTagId($params);
+     
+    
+    $this->db->execute('Select * from tags where id=?',[$params]);
+    $tag = $this->db->fetchOne(); 
+    $title = "Alla frågor med taggen <strong>{$tag->tag}</strong>";
+  
+    $this->allAction($res,$title);
+  }
+  
   public function userAction($params=null){
    
     
     if($id=intval($params)==0)
-      die("User id (int) required as param");
+      die("Userid (int) required as param");
     
     $res = $this->Questions->getByUserId($params);
     

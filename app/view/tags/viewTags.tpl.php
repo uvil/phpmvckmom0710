@@ -10,10 +10,12 @@
                     <div class="row"><h3>Visar alla taggar</h3></div>
                     
                     <?php foreach ($tags as $tag):?>
-                    <div class="col-xs-2 pull-left tagcard">
-                        <div class="tagname"><?=$tag->tag?></div>
+                    <div class="col-sm-2 pull-left">
+                        <div class="tagcard">
+                            <div class="tagname"><span class="fa fa-tags pull-left small"></span> <?=$tag->tag?></div>
                         <div class="tagdescription"><?=$tag->description?></div>
-                        <div class="taglink text-center"><a href="<?=$url?>/<?=$tag->id?>" class="btn btn-orange">Visa tag id#<?=$tag->id?></a></div>
+                        <div class="taglink text-center"><a href="<?=$url?>/<?=$tag->id?>" class="btn btn-orange">Visa frågor</a></div>
+                        </div>
                     </div>
                     <?php endforeach;?>                   
             

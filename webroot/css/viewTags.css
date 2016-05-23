@@ -1,5 +1,26 @@
+.mypanel{height: auto; min-height: 700px;}
 
-body{
-    background: pink;
+.tagcard{
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px 10px;
+    
+}
+
+.tagname{
+    padding: 10px 25px;
+    background: #aaa;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.fa-tags{
+    position: absolute;
+    left: 35px;
+    top:56px;
+    font-size: 0.8em;
 }
 
