@@ -35,6 +35,27 @@ class QuestionController implements \Anax\DI\IInjectionAware {
       
     }
     
+    //save user comment
+    if($this->request->getPost("commentsubmit")=="Spara kommentar"){
+      
+      //get values 
+      $comment = $this->request->getPost('comment');
+      $questionid = $this->request->getPost('questionid');
+      $replyid = $this->request->getPost('replyid');
+      $userid = $this->request->getPost('userid');
+      
+     
+      //echo "comment: $comment<br> questionid: $questionid<br> replyid: $replyid<br>";
+      
+      $this->db->insert('comments',['comment','questionid','replyid','userid','timestamp','ip']);
+      
+      if($replyid==null)$replyid=0;
+      if($questionid==null)$questionid=0;
+      
+      $this->db->execute([$comment,$questionid,$replyid,$userid,time(),$this->request->getServer('REMOTE_ADDR')]);
+           
+    }
+    
     $userid = $this->user->getUserInfo()->id;
     
     $this->theme->setTitle('Visa fråga');
@@ -46,10 +67,10 @@ class QuestionController implements \Anax\DI\IInjectionAware {
      $this->views->add('question/noone');
     else
     {
-      //get answers
+      $questioncomments = $this->Comments->getByQuestionId($res->id);
       $replies = $this->Questions->getReplies($res->id);
       $this->theme->addJavaScript('js/viewone.js');
-      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid,'replies'=>$replies]);
+      $this->views->add('question/viewone',['question'=>$res,'userid'=>$userid,'questioncomments'=>$questioncomments,'replies'=>$replies]);
     }
   }
   

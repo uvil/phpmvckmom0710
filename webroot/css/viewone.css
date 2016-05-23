@@ -62,4 +62,8 @@
 .replyinfo{background: #eee; border-radius: 5px; padding: 10px; padding-bottom: 5px; margin-top: 10px; }
 .gravatar{ border-radius: 3px; margin-bottom: 5px;}
 
+.comment-by{
+    font-size: 0.8em; color: #aaa; 
+}
+
 

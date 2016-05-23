@@ -1,3 +1,4 @@
+
 <div class="clearfix">
     
     <div class="col-sm-12">
@@ -27,8 +28,29 @@
                   
               </div>
                 
+                <div class="row">
+                  <?php 
+                  foreach ($questioncomments as $com) : ?>
+                 <div style="padding-left: 30px;"> 
+                     <span class="comment-by">Kommentar av <?=$com->name?>: </span><?=$com->comment?>
+                 </div>
+                  <hr>
+                    <?php endforeach;?>
+                </div>
+                
               <div class="row addcomment">Lägg till kommentar</div>
-              <div class="comment-field-div"><textarea class="form-control" rows="5" placeholder="Skriv din kommentar här..."></textarea></div>
+              <div class="comment-field-div">
+                  <form method="post">
+                     
+                  <input type="hidden" name="questionid" value="<?=$question->id?>">
+                  <input type="hidden" name="userid" value="<?=$userid?>">
+                      
+                  <textarea class="form-control" name="comment" rows="5" placeholder="Skriv din kommentar här..." required="required"></textarea>
+                  <div class="text-center">
+                      <input type="submit" value="Spara kommentar" name="commentsubmit" class="btn btn-orange">
+                  </div>
+                  </form>
+              </div>
                 
                 
            </div>

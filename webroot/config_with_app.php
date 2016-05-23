@@ -22,6 +22,18 @@ $di->set('Tags', function() use ($di) {
     return $c;
 });
 
+$di->set('Comments', function() use ($di) {
+    $c = new \Phpmvc\Comment\Comments();
+    $c->setDI($di);
+    return $c;
+});
+
+$di->set('CommentsController', function() use ($di) {
+    $c = new \Phpmvc\Comment\CommentController();
+    $c->setDI($di);
+    return $c;
+});
+
 $di->set('TagsController', function() use ($di) {
     $c = new \Phpmvc\Tag\TagsController();
     $c->setDI($di);
