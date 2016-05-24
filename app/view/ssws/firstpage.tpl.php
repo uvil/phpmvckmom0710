@@ -8,31 +8,28 @@
   <div class="marginleft20">
 
   	<h3 >Senaste frågor</h3>
-
+    
+    <?php foreach ($latestquestions as $question):?>
+    <a href="<?=$slugurl.'/'.$question->slug?>" style="text-decoration: none;">
   	<div class="post">
-  		<h4>Vad heter du?</h4>
-  		<p>Av Bosse Giraff</p>
+  		<h4><?=$question->heading?></h4>
+     
+        <?php $tags = explode(',',$question->tags);?>
+        <p>
+          <?php foreach($tags as $tag):?>
+      <span class="label label-default"><?=$tag?></span>
+          <?php endforeach;?>
+     
+          <span class="pull-right">Av <?=$question->name?> den <?=$question->time?>
+          </span></p>
+       
   	</div>
+     </a>
+    <?php endforeach; ?>
   
-  	<div class="post">
-  		<h4>Vad heter du?</h4>
-  		<p>Av Bosse Giraff</p>
-  	</div>
-  
-  	<div class="post">
-  		<h4>Vad heter du?</h4>
-  		<p>Av Bosse Giraff</p>
-  	</div class="post">
-  	
-  	<div class="post">
-  		<h4>Vad heter du?</h4>
-  		<p>Av Bosse Giraff</p>
-  	</div>
 
-  	<div class="post">
-  		<h4>Vad heter du?</h4>
-  		<p>Av Bosse Giraff</p>
-  	</div>
+  
+
  </div>
 
 </div>

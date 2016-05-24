@@ -16,6 +16,15 @@ class Questions extends \Anax\UVC\CDatabaseModel
     }
      */
   
+     public function getLatest($limit)
+     {
+       $this->db->select('*,questions.created as time,GROUP_CONCAT(tag) as tags')->from('questions')->orderBy('questions.created DESC')->limit($limit)->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy('questions.id');
+       $this->db->execute();
+       return $this->db->fetchAll();
+    
+     }
+          
+  
      public function getBySlug($slug)
      {
        

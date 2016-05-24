@@ -14,29 +14,45 @@ $usr->setDI($di);
 $app->theme->setVariable('userinfo', $usr->getUserInfo());
 
 
-//landing page---------------------------------------------------------------------------
-$app->router->add('', function() use ($app,$di) {
-  
-  //set title
-  $app->theme->setVariable('title', "Start");
+function auth()  
+{
+  global $di;
+  global $app;
   
   //is user authorised?
   $usr = new \Anax\UVC\CUserBase('user');
   $usr->setDI($di);
   $auth = $usr->isAuthorised();
   
-  if($auth){
-    $app->views->add('ssws/firstpage');
-  }
-  else{
-  $app->theme->addStylesheet('css/start.css');
-  $app->theme->setVariable('hidenav',true);
- 
-  $login =$app->url->create("login");
-  $apply =$app->url->create("apply");
+  if(!$auth)
+  { 
+    $app->theme->addStylesheet('css/start.css');
+    $app->theme->setVariable('hidenav',true);
 
-  $app->views->add('ssws/start',['loginlink'=>$login,'applylink'=>$apply]);
+    $login =$app->url->create("login");
+    $apply =$app->url->create("apply");
+
+    $app->views->add('ssws/start',['loginlink'=>$login,'applylink'=>$apply]);
+    return false;
   }
+  else
+    return true;
+}
+
+
+//landing page---------------------------------------------------------------------------
+$app->router->add('', function() use ($app,$di) {
+  
+  //set title
+  $app->theme->setVariable('title', "Start");
+  
+   if(auth())
+   {
+    $latestquestions = $app->Questions->getLatest(5);
+    $slugurl =$app->url->create("question/slug");
+    $app->views->add('ssws/firstpage',['latestquestions'=>$latestquestions,'slugurl'=>$slugurl]);
+   }
+  
 });
 
 //login page-----------------------------------------------------------------------------
