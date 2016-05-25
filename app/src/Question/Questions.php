@@ -40,11 +40,13 @@ class Questions extends \Anax\UVC\CDatabaseModel
      
      public function getByTagId($tagid)
      {
-       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug,GROUP_CONCAT(tag) as tags')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy('id')->where('tags.id=?');
+     
+       $this->db->select('questions.id as id,heading,text,questions.created,name,email,slug,GROUP_CONCAT(tag) as tags')->from('questions')->leftJoin('user_question','questions.id=question')->leftJoin('user','user=user.id')->leftJoin('tag_question','tag_question.questionid=questions.id')->rightJoin('tags','tag_question.tagid=tags.id')->groupBy("questions.id having GROUP_CONCAT(tags.id) LIKE '%{$tagid}%'");
        
-        $this->db->execute([$tagid]);
+ 
+        $this->db->execute();
         $res = $this->db->fetchAll();
-        
+     
         return $res;
        
      }

@@ -81,6 +81,7 @@
                         <div class="tags">
                              <?php 
                              $tags = explode(',',$question->tags);
+                             
                              foreach($tags as $tag):?>
                             <span class="label label-default"><?=$tag?></span>
                              <?php endforeach;?>
