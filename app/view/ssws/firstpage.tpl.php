@@ -76,27 +76,18 @@
     <div class="marginleft20">
 
   	<h3 >Populäraste taggar</h3>
+    
+    <?php 
+    foreach ($frequenttags as $key=>$tag):?>
+    
+    <a href="<?=$tagsurl.'/'.$tag->id?>" style="text-decoration: none;">
+  	<div class="post tag-post" >
+        <h4 class="autowidth"><?=$key+1?>:</h4> <div class="btn-orange btn-lg nomargin autowidth" ><?=$tag->tag?></div>
+  		<span><?=$tag->count?> förekomster</span>
+  	</div>
+    
+    <?php endforeach; ?>
 
-  	<div class="post tag-post">
-  		<h4 class="autowidth">1:</h4> <div class="btn-orange btn-lg nomargin autowidth">Rouge</div>
-  		<span>245 förekomster</span>
-  	</div>
-  <div class="post tag-post">
-  		<h4 class="autowidth">2:</h4> <div class="btn-orange btn-lg nomargin autowidth">Obi</div>
-  		<span>113 förekomster</span>
-  	</div>
-  <div class="post tag-post">
-  		<h4 class="autowidth">3:</h4> <div class="btn-orange btn-lg nomargin autowidth">Darth</div>
-  		<span>49 förekomster</span>
-  	</div>
-  <div class="post tag-post">
-  		<h4 class="autowidth">4:</h4> <div class="btn-orange btn-lg nomargin autowidth">Jedi</div>
-  		<span>25 förekomster</span>
-  	</div>
-  <div class="post tag-post">
-  		<h4 class="autowidth">5:</h4> <div class="btn-orange btn-lg nomargin autowidth">Galacticrepublic</div>
-  		<span>5 förekomster</span>
-  	</div>
   
  </div>
  
