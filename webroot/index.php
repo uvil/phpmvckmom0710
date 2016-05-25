@@ -50,7 +50,9 @@ $app->router->add('', function() use ($app,$di) {
    {
     $latestquestions = $app->Questions->getLatest(5);
     $slugurl =$app->url->create("question/slug");
-    $app->views->add('ssws/firstpage',['latestquestions'=>$latestquestions,'slugurl'=>$slugurl]);
+    $userurl =$app->url->create("question/user/");
+    $activeusers = $app->User->getMostActiveUsers(5);
+    $app->views->add('ssws/firstpage',['latestquestions'=>$latestquestions,'slugurl'=>$slugurl,'activeusers'=>$activeusers,'userurl'=>$userurl]);
    }
   
 });

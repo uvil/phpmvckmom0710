@@ -54,6 +54,12 @@ $usr->getUserInfo();
 return $usr;
 });
 
+$di->set('User', function() use ($di) {
+$u = new Anax\Users\User();
+$u->setDI($di);
+return $u;
+});
+
 $di->setShared('db', function() {
     $db = new \Anax\UVC\CDatabaseBasic();
     $db->setOptions(require ANAX_APP_PATH . 'config/config_mysql.php');

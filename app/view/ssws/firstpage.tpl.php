@@ -12,7 +12,7 @@
     <?php foreach ($latestquestions as $question):?>
     <a href="<?=$slugurl.'/'.$question->slug?>" style="text-decoration: none;">
   	<div class="post">
-  		<h4><?=$question->heading?></h4>
+  		<h4 class="post-header"><?=$question->heading?></h4>
      
         <?php $tags = explode(',',$question->tags);?>
         <p>
@@ -42,34 +42,24 @@
 
   <div class="width20 pull-right nopad fullheight backimg2"></div>
   
-    <div class="nomarginleft20">
+  <div class="nomargin left20" style="border: 1px solid #ddd; height: 559px;">
 
   	<h3 >Aktivaste användare</h3>
-
+    
+    <?php foreach ($activeusers as $active):?>
+    
+     <a href="<?=$userurl .'/'.$active->id?>" style="text-decoration: none;">
   	<div class="post">
-  		<h4>Abigail Giraff</h4>
-  		<p>123 inlägg, 45 svar</p>
+        <h4 class="post-header"><?=ucfirst($active->name)?></h4>
+      <p>
+          <strong><?=$active->sum?> aktiviteter</strong> 
+          <span class="small">(<?=$active->questioncount?> frågor, <?=$active->repliescount?> 
+              svar och <?=$active->commentscount?> kommentarer)</span>.</p>
   	</div>
+     </a>
+    <?php endforeach; ?>
   
-  	<div class="post">
-  		<h4>Bo Ko</h4>
-  		<p>53 inlägg, 35 svar</p>
-  	</div>
-  
-  	<div class="post">
-  		<h4>Anna Stefansson</h4>
-  		<p>33 inlägg, 23 svar</p>
-  	</div class="post">
   	
-  	<div class="post">
-  		<h4>Jamal Össtyrmen</h4>
-  		<p>13 inlägg, 15 svar</p>
-  	</div>
-
-  	<div class="post">
-  		<h4>Hentai Felamosz</h4>
-  		<p>3 inlägg, 5 svar</p>
-  	</div>
  </div>
 
 </div>
