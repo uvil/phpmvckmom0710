@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 <div class="panel-body">
 <div class="mypanel color1">
- 
+    
 
   <div class="width20 pull-left nopad fullheight backimg1"></div>
 

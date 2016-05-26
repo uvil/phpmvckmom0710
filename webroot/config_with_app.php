@@ -68,6 +68,13 @@ $di->setShared('db', function() {
 });
 
 
+$di->setShared('TextFilter', function() {
+    
+    $t = new \Anax\UVC\CTextFilter();
+    return $t;
+});
+
+
 
 
 //$app = new \Anax\Kernel\CAnax($di);

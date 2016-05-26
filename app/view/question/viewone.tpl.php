@@ -1,15 +1,41 @@
+<?php 
+$md =<<<aaa
+#Heading 1
+        
+##Heading 2
+        
+Some text
+        
+Urban
+=====
+
+skriver lite text
+        
+    nu blir det kod
+    <html>Kolla kolla</html>
+aaa;
+//echo $this->TextFilter->doFilter($md,'markdown');
+?>
+
+
+
+               
 
 <div class="clearfix">
+
     
     <div class="col-sm-12">
         <div class="panel panel-default" style="margin:10px 0px;">
         <div class="panel-body">
             
+            
+            
             <div class="mypanel">
                 
               <div class="jumbotron uvtron">
+               
                   <h2><?=$question->heading?></h2>
-                  <p><?=$question->text?></p>
+                  <p><?=$this->TextFilter->doFilter($question->text,'markdown')?></p>
                   
                   <div class="pull-right col-sm-2 writtenby text-center">
                       Skriven av: <?=$question->name?>
@@ -28,11 +54,14 @@
                   
               </div>
                 
+
+                
                 <div class="row">
                   <?php 
                   foreach ($questioncomments as $com) : ?>
                  <div style="padding-left: 30px;"> 
-                     <span class="comment-by">Kommentar av <?=$com->name?>: </span><?=$com->comment?>
+                     <span class="comment-by">Kommentar av <?=$com->name?>: </span>
+                     <?=$this->TextFilter->doFilter($com->comment,'markdown')?> 
                  </div>
                   <hr>
                     <?php endforeach;?>
@@ -74,7 +103,9 @@
                 
                
                 <div class="row reply">
-                    <div class="reply-text"><?=$reply->text?></div>
+                    <div class="reply-text">
+                   <?=$this->TextFilter->doFilter($reply->text,'markdown')?>     
+                    </div>
                     <div class="col-sm-2 col-sm-offset-10 col-xs-6 col-xs-offset-6 text-center replyinfo">Skrivet av: <strong><?=$reply->name?></strong>   
                      <?php $src="http://www.gravatar.com/avatar/". md5(strtolower(trim($reply->email))). "?s=16&amp;d=identicon"; ?>
                         <img class="gravatar" src="<?=$src;?>"> 
@@ -85,16 +116,20 @@
                 
                  <hr style="margin-top:5px;">
                  
+             <?php 
+              if(key_exists($reply->id, $repliescomments)):?>
                 <div class="row">
-                  <?php 
-                  $comments = explode(',',$repliescomments[$reply->id]['coms']);
+                   
+                  <?php $comments = explode(',',$repliescomments[$reply->id]['coms']);
                   foreach ($comments as $com) : ?>
                  <div style="padding-left: 30px;"> 
-                     <span class="comment-by">Kommentar av <?=$repliescomments[$reply->id]['name']?>: </span><?=$com?>
+                     <span class="comment-by">Kommentar av <?=$repliescomments[$reply->id]['name']?>: </span>
+                      <?=$this->TextFilter->doFilter($com,'markdown')?>    
                  </div>
                   <hr>
                     <?php endforeach;?>
                 </div>
+             <?php endif; ?>
              
               
              <div class="row addcomment">Lägg till kommentar</div>
